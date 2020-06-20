@@ -46,6 +46,13 @@ Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent)
     connect(this->dropbox, &QOAuth2AuthorizationCodeFlow::granted, [=](){
         qDebug() << __FUNCTION__ << __LINE__ << "Access Granted!";
 
+        auto reply = this->dropbox->post(QUrl("https://api.dropboxapi.com/2/file_requests/list_v2"));
+        this->dropbox->setContentType("application/json");
+
+        connect(reply, &QNetworkReply::finished, [reply](){
+            qDebug() << "REQUEST FINISHED. Error? " << (reply->error() != QNetworkReply::NoError);
+            qDebug() << reply->readAll();
+        });
     });
 }
 
