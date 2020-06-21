@@ -48,15 +48,23 @@ Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent),
     connect(this->dropbox, &QOAuth2AuthorizationCodeFlow::granted, [=](){
         qDebug() << __FUNCTION__ << __LINE__ << "Access Granted!";
 
-        QVariantMap params;
-        params.insert("limit", 100);
+        QJsonObject obj;
+        obj.insert("limit", 100);
 
+        QJsonDocument doc(obj);
+        QString strJson(doc.toJson(QJsonDocument::Compact));
 
-        auto m_networkReply = this->dropbox->post(QUrl("https://api.dropboxapi.com/2/file_requests/list_v2"), params);
+        QNetworkRequest m_networkRequest;
+        m_networkRequest.setUrl(QUrl("https://api.dropboxapi.com/2/file_requests/list_v2"));
 
-        connect(m_networkReply, &QNetworkReply::finished, [=](){
-            qDebug() << "REQUEST FINISHED. Error? " << (m_networkReply->error() != QNetworkReply::NoError);
-            qDebug() << m_networkReply->readAll();
+        m_networkRequest.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+        m_networkRequest.setRawHeader("Authorization", "Bearer " + this->dropbox->token().toUtf8());
+
+        auto reply = m_networkAccessManager->post(m_networkRequest, strJson.toUtf8());
+
+        connect(reply, &QNetworkReply::finished, [=](){
+            qDebug() << "REQUEST FINISHED. Error? " << (reply->error() != QNetworkReply::NoError);
+            qDebug() << reply->readAll();
         });
     });
 }
