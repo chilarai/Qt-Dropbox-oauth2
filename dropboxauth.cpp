@@ -1,6 +1,8 @@
 #include "dropboxauth.h"
 
-Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent)
+Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent),
+    m_networkAccessManager(new QNetworkAccessManager(this)),
+    m_networkReply(nullptr)
 {
 
     this->dropbox = new QOAuth2AuthorizationCodeFlow(this);
@@ -46,12 +48,14 @@ Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent)
     connect(this->dropbox, &QOAuth2AuthorizationCodeFlow::granted, [=](){
         qDebug() << __FUNCTION__ << __LINE__ << "Access Granted!";
 
-        auto reply = this->dropbox->post(QUrl("https://api.dropboxapi.com/2/file_requests/list_v2"));
-        this->dropbox->setContentType("application/json");
+        QVariantMap params;
+        params.insert("limit", 100);
 
-        connect(reply, &QNetworkReply::finished, [reply](){
-            qDebug() << "REQUEST FINISHED. Error? " << (reply->error() != QNetworkReply::NoError);
-            qDebug() << reply->readAll();
+        auto m_networkReply = this->dropbox->post(QUrl("https://api.dropboxapi.com/2/file_requests/list_v2"), params);
+
+        connect(m_networkReply, &QNetworkReply::finished, [=](){
+            qDebug() << "REQUEST FINISHED. Error? " << (m_networkReply->error() != QNetworkReply::NoError);
+            qDebug() << m_networkReply->readAll();
         });
     });
 }

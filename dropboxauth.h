@@ -6,6 +6,9 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QAbstractOAuth>
 
 #include <QUrl>
 #include <QUrlQuery>
@@ -22,6 +25,10 @@ public:
 
 private:
     QOAuth2AuthorizationCodeFlow * dropbox;
+    QNetworkAccessManager * m_networkAccessManager;
+    QNetworkReply * m_networkReply;
+    QByteArray * m_tempStorage;
+    QVariantMap outputStatus;
 };
 
 #endif // DROPBOXAUTH_H
