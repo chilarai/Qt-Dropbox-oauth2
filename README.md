@@ -35,4 +35,6 @@ Contains the button which calls the `grant()` method of Qt and prompts Dropbox a
 
 #### Others
 
--   [Dropbox developer console screenshot](DropboxConsoleScreenshot.png): Remember to put http://127.0.0.1:your_port instead of http://localhost:your_port else this will result in `redirect_uri mismatch error`
+-   [Dropbox developer console screenshot](DropboxConsoleScreenshot.png): Remember to put http://127.0.0.1:your_port instead of http://localhost:your_port else this will result in `redirect_uri mismatch error`.
+
+Remember, the Redirect URL has to be exactly same as mentioned in the Dropbox developer console
