@@ -33,9 +33,9 @@ Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent),
     // Attached screenshot of Dropbox Console
 
     this->dropbox->setAuthorizationUrl(QUrl("https://www.dropbox.com/oauth2/authorize"));
-    this->dropbox->setClientIdentifier("63tucv4hmxxr4rf");
+    this->dropbox->setClientIdentifier("APP_KEY");
     this->dropbox->setAccessTokenUrl(QUrl("https://api.dropboxapi.com/oauth2/token"));
-    this->dropbox->setClientIdentifierSharedKey("u29h3ibejo1vqav");
+    this->dropbox->setClientIdentifierSharedKey("APP_SECRET");
 
 
     // In my case, I have hardcoded 5476
@@ -50,6 +50,7 @@ Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent),
 
         QVariantMap params;
         params.insert("limit", 100);
+
 
         auto m_networkReply = this->dropbox->post(QUrl("https://api.dropboxapi.com/2/file_requests/list_v2"), params);
 
