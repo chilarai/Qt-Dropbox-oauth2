@@ -20,8 +20,8 @@ Please read the comments in the files. I have tried to explain all the details o
 Remember to edit the `APP_KEY`, `APP_SECRET` & `port_number` (in my case, it is 5476) in dropboxauth.cpp
 
 ```
-this->dropbox->setClientIdentifier("MY_CLIENT_ID");
-this->dropbox->setClientIdentifierSharedKey("MY_SECRET_KEY");
+this->dropbox->setClientIdentifier("APP_KEY");
+this->dropbox->setClientIdentifierSharedKey("APP_SECRET");
 auto replyHandler = new QOAuthHttpServerReplyHandler(5476, this);
 ```
 
