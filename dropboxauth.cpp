@@ -45,6 +45,8 @@ Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent),
     this->dropbox->setReplyHandler(replyHandler);
 
 
+    // If access granted, pull up file list
+
     connect(this->dropbox, &QOAuth2AuthorizationCodeFlow::granted, [=](){
         qDebug() << __FUNCTION__ << __LINE__ << "Access Granted!";
 
