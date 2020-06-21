@@ -1,8 +1,7 @@
 #include "dropboxauth.h"
 
 Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent),
-    m_networkAccessManager(new QNetworkAccessManager(this)),
-    m_networkReply(nullptr)
+    m_networkAccessManager(new QNetworkAccessManager(this))
 {
 
     this->dropbox = new QOAuth2AuthorizationCodeFlow(this);
