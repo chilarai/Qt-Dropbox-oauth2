@@ -32,8 +32,8 @@ Dropboxauth::Dropboxauth(QObject *parent) : QObject(parent),
     // Attached screenshot of Dropbox Console
 
     this->dropbox->setAuthorizationUrl(QUrl("https://www.dropbox.com/oauth2/authorize"));
-    this->dropbox->setClientIdentifier("APP_KEY");
     this->dropbox->setAccessTokenUrl(QUrl("https://api.dropboxapi.com/oauth2/token"));
+    this->dropbox->setClientIdentifier("APP_KEY");
     this->dropbox->setClientIdentifierSharedKey("APP_SECRET");
 
 
