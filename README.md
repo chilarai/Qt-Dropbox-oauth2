@@ -10,7 +10,7 @@ Feel free to improve the code and post your issues
 
 Remember to add `networkauth` in the list of Qt module dependencies
 
-```
+```sh
 QT += networkauth
 ```
 
@@ -19,7 +19,7 @@ QT += networkauth
 Please read the comments in the files. I have tried to explain all the details of the code.
 Remember to edit the `APP_KEY`, `APP_SECRET` & `port_number` (in my case, it is 5476) in dropboxauth.cpp
 
-```
+```sh
 this->dropbox->setClientIdentifier("APP_KEY");
 this->dropbox->setClientIdentifierSharedKey("APP_SECRET");
 auto replyHandler = new QOAuthHttpServerReplyHandler(5476, this);
